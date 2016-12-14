@@ -13,10 +13,10 @@ describe('movie actions', function() {
 
   describe('deleting a movie', function(){
     it('returns the delete movies action', function() {
-      let movie = {id: 5, title: 'Dead Poets Society', year: 1989};
-      let action = deleteMovie(movie);
+      let id = 5;
+      let action = deleteMovie(id);
       expect(action.type).toEqual('DELETE_MOVIE');
-      expect(action.movie.title).toEqual('Dead Poets Society');
+      expect(action.id).toEqual(5);
     })
   })
 })
@@ -24,16 +24,18 @@ describe('movie actions', function() {
 describe('username actions', function(){
   describe('updating a username', function(){
     it('returns the update username action', function(){
-      let action = updateUsername('Miles');
+      let action = updateUsername('Bob', 'Miles');
       expect(action.type).toEqual('UPDATE_USERNAME');
-      expect(action.username).toEqual('Miles');
+      expect(action.oldUsername).toEqual('Bob');
+      expect(action.newUsername).toEqual('Miles');
     })
   })
 
   describe('resetting a username', function(){
     it('resets a username to default', function(){
-      let action = resetUsername();
+      let action = resetUsername('Bob');
       expect(action.type).toEqual('RESET_USERNAME');
+      expect(action.oldUsername).toEqual('Bob')
       expect(action.username).toEqual('default');
     })
   })
